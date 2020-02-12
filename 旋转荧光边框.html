@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="css/旋转荧光边框.css"/>
+	</head>
+	<body>
+		<div id="app">
+			<div class="content">
+				<h2 @click="rotate()">A blingbling box</h2>
+				<p>hello world</p>
+			</div>
+			<div class="fluorescence fluorescence-filter" :style="{background:background}"></div>
+			<div class="fluorescence fluorescence-border" :style="{background:background}"></div>
+		</div>
+		<script type="text/javascript">
+			var app = new Vue({
+				el:"#app",
+				data:{
+					angle:235,
+					background:"linear-gradient(235deg,#89ff00,#060c21,#00bcd4)",
+					timer:0
+				},
+				methods:{
+					rotate(){
+						var that = this
+						if(this.timer != 0){
+							clearInterval(this.timer)
+							this.timer = 0
+						}
+						this.timer = setInterval(function(){
+							that.angle++;
+							that.background = "linear-gradient("+that.angle+"deg,#89ff00,#060c21,#00bcd4)";
+							if (that.angle == 595) {
+								that.angle = 235
+							}
+						},50)
+					}
+				}
+			})
+		</script>
+	</body>
+</html>
